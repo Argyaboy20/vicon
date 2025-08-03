@@ -1,2 +1,523 @@
 /* For information on how to create your own theme, please see:
 http://ionicframework.com/docs/theming/ */
+
+/* ===== GLOBAL PAGE BACKGROUND ===== */
+/* White background for content area only, gradient for page background */
+ion-content {
+  --background: transparent;
+}
+
+/* Gradient background for page to show glassmorphism effect */
+ion-page {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* ===== GLOBAL TOOLBAR STYLES ===== */
+/* Transparent glassmorphism toolbar with blur effect */
+ion-header ion-toolbar {
+  --background: transparent !important;
+  --border-width: 0 !important;
+  --min-height: 60px;
+}
+
+/* Create glassmorphism effect using backdrop and overlay */
+ion-header {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
+  position: relative;
+}
+
+/* Additional glassmorphism layer */
+ion-header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.15) 0%, 
+    rgba(255, 255, 255, 0.05) 100%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ensure content is above the glassmorphism layer */
+ion-header ion-toolbar,
+ion-header .toolbar-content {
+  position: relative;
+  z-index: 1;
+}
+
+/* Force background for better compatibility */
+.ion-page {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+}
+
+/* Header container styling */
+ion-header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+/* ===== TOOLBAR CONTENT STYLES ===== */
+/* Custom toolbar content container */
+.toolbar-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+/* Logo and title container */  
+.logo-title-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+/* App logo styling */
+.app-logo {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+/* App title styling */
+.app-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+/* Search button container - positioned absolute to right */
+.search-button-container {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+/* Search button styling */
+.search-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.search-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: scale(1.05);
+}
+
+.search-button ion-icon {
+  color: #333;
+  font-size: 20px;
+}
+
+/* ===== SEARCH MODAL STYLES ===== */
+/* Modal overlay */
+.search-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  padding-top: 0;
+}
+
+/* Modal container - exact replica of image.png */
+.search-modal {
+  background: white;
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 50vh;
+  margin: 0;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
+  animation: slideDown 0.3s ease-out;
+  border-radius: 0 0 24px 24px;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Modal content wrapper */
+.search-modal-content {
+  padding: 60px 20px 32px 20px;
+}
+
+/* Search modal header - minimal like in image */
+.search-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+  padding: 0 4px;
+}
+
+.search-modal-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+}
+
+.search-modal-close {
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #999;
+  cursor: pointer;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.search-modal-close:hover {
+  background: #f5f5f5;
+  color: #666;
+}
+
+/* Main search input */
+.search-modal-input {
+  width: 100%;
+  padding: 16px 20px;
+  border: 2px solid #e8e8e8;
+  border-radius: 12px;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+  background: #fafafa;
+  margin-bottom: 16px;
+}
+
+.search-modal-input:focus {
+  border-color: #667eea;
+  background: white;
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+/* Center icon container like in image */
+.search-modal-icon-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 40px 0;
+}
+
+.search-modal-icon {
+  width: 120px;
+  height: 120px;
+  background: #f0f4ff;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 3px solid #e8edff;
+}
+
+.search-modal-icon svg {
+  width: 60px;
+  height: 60px;
+  color: #667eea;
+}
+
+/* Bottom text like in image */
+.search-modal-text {
+  text-align: center;
+  margin-top: 24px;
+}
+
+.search-modal-text h3 {
+  font-size: 24px;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 8px 0;
+}
+
+.search-modal-text p {
+  font-size: 16px;
+  color: #666;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* ===== TAB1 CONTENT STYLES ===== */
+/* Main container for tab1 content */
+.video-converter-container {
+  padding: 32px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  background: #f8f9fa;
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12), 
+              0 4px 15px rgba(0, 0, 0, 0.08),
+              0 1px 3px rgba(0, 0, 0, 0.05);
+  margin-top: 24px;
+  position: relative;
+}
+
+/* Page title */
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+/* Subtitle text */
+.page-subtitle {
+  font-size: 16px;
+  color: #666;
+  text-align: center;
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+/* Video input section */
+.video-input-section {
+  margin-bottom: 24px;
+}
+
+/* Input container with button */
+.input-container {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+/* Video URL input */
+.video-input {
+  flex: 1;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 25px;
+  background: white;
+  color: #333;
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: box-shadow 0.3s ease;
+}
+
+.video-input:focus {
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.15);
+}
+
+.video-input::placeholder {
+  color: #999;
+}
+
+/* Convert button */
+.convert-button {
+  padding: 16px 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+}
+
+.convert-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.convert-button:active {
+  transform: translateY(0);
+}
+
+/* Video info display */
+.video-info {
+  padding: 16px 20px;
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 12px;
+  color: #333;
+  font-size: 14px;
+  margin-bottom: 24px;
+  border-left: 4px solid #667eea;
+}
+
+/* Resolution options container */
+.resolution-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* Individual resolution option */
+.resolution-option {
+  padding: 12px 16px;
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  color: #666;
+}
+
+.resolution-option:hover {
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.05);
+  color: #667eea;
+  transform: translateY(-2px);
+}
+
+.resolution-option.selected {
+  border-color: #667eea;
+  background: #667eea;
+  color: white;
+}
+
+/* Terms of use text */
+.terms-text {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 14px;
+  color: #666;
+}
+
+.terms-link {
+  color: #667eea;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.terms-link:hover {
+  color: #5a67d8;
+}
+
+/* Features section */
+.features-section {
+  margin-top: 48px;
+  padding: 32px 20px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  margin-top: 24px;
+}
+
+.feature-card {
+  text-align: center;
+  padding: 24px 20px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #f0f4ff;
+  border: 2px solid #e8edff;
+}
+
+.feature-icon svg {
+  width: 32px;
+  height: 32px;
+  color: #667eea;
+}
+
+.feature-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.feature-description {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+@media (max-width: 768px) {
+  .video-converter-container {
+    padding: 24px 16px;
+  }
+  
+  .input-container {
+    flex-direction: column;
+  }
+  
+  .convert-button {
+    width: 100%;
+  }
+  
+  .resolution-options {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1,0 +1,352 @@
+/* ===== TAB1 CONTENT STYLES ===== */
+/* Main container for tab1 content */
+.video-converter-container {
+  padding: 32px 20px;
+  max-width: 600px;
+  margin: 0 auto;
+  background: #f8f9fa;
+  border-radius: 24px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.12), 
+              0 4px 15px rgba(0, 0, 0, 0.08),
+              0 1px 3px rgba(0, 0, 0, 0.05);
+  margin-top: 5px;
+  margin-bottom: 40px; /* Add bottom margin for better scrolling */
+  position: relative;
+}
+
+/* ===== PAGE TITLE AND SUBTITLE ===== */
+/* Page title */
+.page-title {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  text-align: center;
+  margin-bottom: 12px;
+}
+
+/* Subtitle text */
+.page-subtitle {
+  font-size: 16px;
+  color: #666;
+  text-align: center;
+  margin-bottom: 32px;
+  line-height: 1.5;
+}
+
+/* ===== VIDEO INPUT SECTION ===== */
+/* Video input section */
+.video-input-section {
+  margin-bottom: 24px;
+}
+
+/* Input container with button */
+.input-container {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+/* Video URL input */
+.video-input {
+  flex: 1;
+  padding: 16px 20px;
+  border: none;
+  border-radius: 25px;
+  background: white;
+  color: #333;
+  font-size: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  outline: none;
+  transition: box-shadow 0.3s ease;
+  min-width: 0; /* Allows flex item to shrink below content size */
+}
+
+.video-input:focus {
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.15);
+}
+
+.video-input::placeholder {
+  color: #999;
+}
+
+/* Convert button */
+.convert-button {
+  padding: 16px 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  border-radius: 25px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+  white-space: nowrap; /* Prevents text wrapping */
+  flex-shrink: 0; /* Prevents button from shrinking */
+}
+
+.convert-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.convert-button:active {
+  transform: translateY(0);
+}
+
+/* ===== VIDEO INFO DISPLAY ===== */
+/* Video info display */
+.video-info {
+  padding: 16px 20px;
+  background: rgba(102, 126, 234, 0.1);
+  border-radius: 12px;
+  color: #333;
+  font-size: 14px;
+  margin-bottom: 24px;
+  border-left: 4px solid #667eea;
+}
+
+/* ===== RESOLUTION OPTIONS ===== */
+/* Resolution options container */
+.resolution-options {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: 12px;
+  margin-top: 24px;
+}
+
+/* Individual resolution option */
+.resolution-option {
+  padding: 12px 16px;
+  background: white;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  font-weight: 600;
+  color: #666;
+}
+
+.resolution-option:hover {
+  border-color: #667eea;
+  background: rgba(102, 126, 234, 0.05);
+  color: #667eea;
+  transform: translateY(-2px);
+}
+
+.resolution-option.selected {
+  border-color: #667eea;
+  background: #667eea;
+  color: white;
+}
+
+/* ===== TERMS AND FEATURES SECTION ===== */
+/* Terms of use text */
+.terms-text {
+  text-align: center;
+  margin-top: 24px;
+  font-size: 14px;
+  color: #666;
+}
+
+.terms-link {
+  color: #667eea;
+  text-decoration: underline;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.terms-link:hover {
+  color: #5a67d8;
+}
+
+/* Features section */
+.features-section {
+  margin-top: 48px;
+  padding: 32px 20px;
+  max-width: 900px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 32px;
+  margin-top: 24px;
+}
+
+.feature-card {
+  text-align: center;
+  padding: 24px 20px;
+  background: white;
+  border-radius: 16px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.feature-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: #f0f4ff;
+  border: 2px solid #e8edff;
+}
+
+.feature-icon svg {
+  width: 32px;
+  height: 32px;
+  color: #667eea;
+}
+
+.feature-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 12px;
+}
+
+.feature-description {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+/* ===== RESPONSIVE DESIGN ===== */
+/* Tablet breakpoint */
+@media (max-width: 768px) {
+  .video-converter-container {
+    padding: 24px 16px;
+    margin-top: 16px;
+  }
+  
+  .page-title {
+    font-size: 24px;
+  }
+  
+  .page-subtitle {
+    font-size: 14px;
+  }
+  
+  .features-section {
+    padding: 24px 16px;
+  }
+  
+  .features-grid {
+    grid-template-columns: 1fr;
+    gap: 24px;
+  }
+}
+
+/* Large mobile devices (up to 480px) */
+@media (max-width: 480px) {
+  .video-converter-container {
+    padding: 20px 12px;
+    border-radius: 16px;
+    margin-top: 12px;
+  }
+  
+  .page-title {
+    font-size: 22px;
+  }
+  
+  .input-container {
+    gap: 6px; /* Reduced gap for smaller screens */
+  }
+  
+  .video-input {
+    padding: 14px 16px;
+    font-size: 15px;
+  }
+  
+  .convert-button {
+    padding: 14px 16px;
+    font-size: 15px;
+  }
+  
+  .resolution-options {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  
+  .resolution-option {
+    padding: 10px 12px;
+    font-size: 14px;
+  }
+}
+
+/* Small mobile devices (up to 375px) */
+@media (max-width: 375px) {
+  .video-converter-container {
+    padding: 16px 10px;
+  }
+  
+  .input-container {
+    gap: 4px; /* Even smaller gap for very small screens */
+  }
+  
+  .video-input {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+  
+  .convert-button {
+    padding: 12px 14px;
+    font-size: 14px;
+  }
+  
+  .page-title {
+    font-size: 20px;
+  }
+  
+  .page-subtitle {
+    font-size: 13px;
+  }
+}
+
+/* Very small mobile devices (up to 320px) */
+@media (max-width: 320px) {
+  .video-converter-container {
+    padding: 14px 8px;
+  }
+  
+  .input-container {
+    gap: 3px;
+  }
+  
+  .video-input {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+  
+  .convert-button {
+    padding: 10px 12px;
+    font-size: 13px;
+  }
+  
+  .page-title {
+    font-size: 18px;
+  }
+  
+  .resolution-options {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 6px;
+  }
+  
+  .resolution-option {
+    padding: 8px 10px;
+    font-size: 13px;
+  }
+}

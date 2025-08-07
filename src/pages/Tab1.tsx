@@ -7,7 +7,7 @@ import {
   IonToolbar,
   IonIcon
 } from '@ionic/react';
-import { searchOutline } from 'ionicons/icons';
+import { searchOutline, moonOutline, sunnyOutline } from 'ionicons/icons';
 import './Tab1.css';
 import '../theme/variables.css';
 
@@ -41,6 +41,7 @@ const Tab1: React.FC = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isConverting, setIsConverting] = useState<boolean>(false);
   const [conversionResult, setConversionResult] = useState<ConversionResult | null>(null);
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
   /* ===== CONSTANTS ===== */
   const resolutionOptions = ['480p', '720p', '1080p', '1440p'];
@@ -97,7 +98,7 @@ const Tab1: React.FC = () => {
   /* ===== FETCH REAL VIDEO METADATA ===== */
   const fetchVideoMetadata = async (url: string): Promise<VideoInfo | null> => {
     setIsLoading(true);
-    
+
     try {
       /* Detect platform first */
       const platform = detectPlatform(url);
@@ -113,7 +114,7 @@ const Tab1: React.FC = () => {
 
       /* Simulate API call - In real implementation, this would call your backend */
       const metadata = await simulateVideoMetadataFetch(url, platform, videoId);
-      
+
       return metadata;
     } catch (error) {
       console.error('Error fetching video metadata:', error);
@@ -170,21 +171,21 @@ const Tab1: React.FC = () => {
   /* ===== DETECT PLATFORM FROM URL ===== */
   const detectPlatform = (url: string): string | null => {
     const urlLower = url.toLowerCase();
-    
+
     if (urlLower.includes('youtube.com') || urlLower.includes('youtu.be')) return 'YouTube';
     if (urlLower.includes('instagram.com')) return 'Instagram';
     if (urlLower.includes('tiktok.com')) return 'TikTok';
     if (urlLower.includes('facebook.com')) return 'Facebook';
     if (urlLower.includes('twitter.com') || urlLower.includes('x.com')) return 'Twitter';
     if (urlLower.includes('rednote.com')) return 'Rednote';
-    
+
     return null;
   };
 
   /* ===== PERFORM REAL VIDEO CONVERSION ===== */
   const performVideoConversion = async (videoInfo: VideoInfo, resolution: string): Promise<ConversionResult> => {
     setIsConverting(true);
-    
+
     try {
       /* Simulate conversion process - In real implementation, this would call your backend */
       const result = await simulateVideoConversion(videoInfo, resolution);
@@ -255,6 +256,27 @@ const Tab1: React.FC = () => {
     return true;
   };
 
+  /* Toggle between dark mode and light mode */
+  const toggleDarkMode = (): void => {
+    const newDarkMode = !isDarkMode;
+    setIsDarkMode(newDarkMode);
+
+    // Apply dark mode class to document for global styling
+    if (newDarkMode) {
+      document.documentElement.classList.add('dark-mode');
+    } else {
+      document.documentElement.classList.remove('dark-mode');
+    }
+  };
+
+  /* Initialize dark mode based on system preference */
+  const initializeDarkMode = (): void => {
+    // Default to light mode (false)
+    setIsDarkMode(false);
+    // Ensure dark mode class is removed on init
+    document.documentElement.classList.remove('dark-mode');
+  };
+
   /* ===== ENHANCED EVENT HANDLERS ===== */
   const handleVideoUrlChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const url = e.target.value;
@@ -313,6 +335,12 @@ const Tab1: React.FC = () => {
     }
   };
 
+  /* ===== USE EFFECT UNTUK INISIALISASI DARK MODE ===== */
+  React.useEffect(() => {
+    // Initialize with light mode as default
+    initializeDarkMode();
+  }, []);
+
   const toggleSearchModal = () => {
     setShowSearchModal(!showSearchModal);
   };
@@ -346,12 +374,24 @@ const Tab1: React.FC = () => {
             <h1 className="app-title">VideoConvert</h1>
           </div>
 
-          {/* Search Button */}
-          <div className="search-button-container">
+          {/* Action Buttons Container */}
+          <div className="action-buttons-container">
+            {/* Dark Mode Toggle Button */}
+            <button
+              className="theme-toggle-button"
+              onClick={toggleDarkMode}
+              aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+              title={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+            >
+              <IonIcon icon={isDarkMode ? sunnyOutline : moonOutline} />
+            </button>
+
+            {/* Search Button */}
             <button
               className="search-button"
               onClick={toggleSearchModal}
               aria-label="Search"
+              title="Search tools"
             >
               <IonIcon icon={searchOutline} />
             </button>
@@ -422,7 +462,7 @@ const Tab1: React.FC = () => {
             <div>
               <strong>✅ Conversion Complete!</strong>
               <div style={{ fontSize: '12px', marginTop: '4px' }}>
-                File: {conversionResult.filename}<br/>
+                File: {conversionResult.filename}<br />
                 Size: {conversionResult.fileSize}
               </div>
             </div>

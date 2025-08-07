@@ -1,3 +1,71 @@
+:root {
+  /* Light mode colors */
+  --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --bg-secondary: rgba(255, 255, 255, 0.1);
+  --text-primary: #333;
+  --text-secondary: #666;
+  --text-white: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.1);
+  --glass-border: rgba(255, 255, 255, 0.18);
+  --glass-shadow: rgba(31, 38, 135, 0.15);
+  --button-bg: rgba(255, 255, 255, 0.2);
+  --button-border: rgba(255, 255, 255, 0.3);
+  --button-hover: rgba(255, 255, 255, 0.3);
+  --input-bg: #fafafa;
+  --input-focus-bg: white;
+  --input-border: #e8e8e8;
+  --modal-bg: white;
+  --feature-card-bg: white;
+  --video-info-bg: rgba(102, 126, 234, 0.1);
+  --video-info-border: rgba(102, 126, 234, 0.3);
+  --success-bg: rgba(40, 167, 69, 0.1);
+  --success-border: rgba(40, 167, 69, 0.3);
+  --success-text: #28a745;
+  --error-bg: rgba(220, 53, 69, 0.1);
+  --error-border: rgba(220, 53, 69, 0.3);
+  --error-text: #dc3545;
+  --warning-bg: rgba(255, 193, 7, 0.1);
+  --warning-border: #ffc107;
+  --resolution-bg: rgba(255, 255, 255, 0.9);
+  --resolution-selected-bg: #667eea;
+  --resolution-text: #333;
+  --resolution-selected-text: white;
+}
+
+/* Dark mode colors */
+.dark-mode {
+  --bg-primary: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+  --bg-secondary: rgba(255, 255, 255, 0.05);
+  --text-primary: #ffffff;
+  --text-secondary: #b0b0b0;
+  --text-white: #ffffff;
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
+  --glass-shadow: rgba(0, 0, 0, 0.3);
+  --button-bg: rgba(255, 255, 255, 0.1);
+  --button-border: rgba(255, 255, 255, 0.2);
+  --button-hover: rgba(255, 255, 255, 0.15);
+  --input-bg: #2a2a3e;
+  --input-focus-bg: #353548;
+  --input-border: rgba(255, 255, 255, 0.2);
+  --modal-bg: #1e1e2e;
+  --feature-card-bg: rgba(255, 255, 255, 0.05);
+  --video-info-bg: rgba(102, 126, 234, 0.15);
+  --video-info-border: rgba(102, 126, 234, 0.4);
+  --success-bg: rgba(40, 167, 69, 0.15);
+  --success-border: rgba(40, 167, 69, 0.4);
+  --success-text: #40c463;
+  --error-bg: rgba(220, 53, 69, 0.15);
+  --error-border: rgba(220, 53, 69, 0.4);
+  --error-text: #ff6b7a;
+  --warning-bg: rgba(255, 193, 7, 0.15);
+  --warning-border: rgba(255, 193, 7, 0.6);
+  --resolution-bg: rgba(255, 255, 255, 0.1);
+  --resolution-selected-bg: #667eea;
+  --resolution-text: #ffffff;
+  --resolution-selected-text: white;
+}
+
 /* ===== GLOBAL PAGE BACKGROUND ===== */
 ion-content {
   --background: transparent;
@@ -8,8 +76,7 @@ ion-content {
 
 /* Gradient background for page to show glassmorphism effect */
 ion-page {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  /* Ensure full height without scroll issues */
+  background: var(--bg-primary) !important;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -25,13 +92,11 @@ ion-header ion-toolbar {
 
 /* Create glassmorphism effect using backdrop and overlay */
 ion-header {
-  background: rgba(255, 255, 255, 0.1) !important;
+  background: var(--glass-bg) !important;
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
-  box-shadow: 0 8px 32px rgba(31, 38, 135, 0.15);
-  position: relative;
-  /* Fixed positioning to prevent scroll issues */
+  border-bottom: 1px solid var(--glass-border);
+  box-shadow: 0 8px 32px var(--glass-shadow);
   position: fixed;
   top: 0;
   left: 0;
@@ -47,10 +112,9 @@ ion-header::before {
   left: 0;
   right: 0;
   bottom: 0;
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.15) 0%, 
-    rgba(255, 255, 255, 0.05) 100%
-  );
+  background: linear-gradient(135deg,
+      rgba(255, 255, 255, 0.15) 0%,
+      rgba(255, 255, 255, 0.05) 100%);
   pointer-events: none;
   z-index: 0;
 }
@@ -64,7 +128,7 @@ ion-header .toolbar-content {
 
 /* Force background for better compatibility */
 .ion-page {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--bg-primary) !important;
   min-height: 100vh;
 }
 
@@ -88,7 +152,7 @@ ion-content {
   padding: 0 16px;
 }
 
-/* Logo and title container */  
+/* Logo and title container */
 .logo-title-container {
   display: flex;
   align-items: center;
@@ -113,7 +177,7 @@ ion-content {
 .app-title {
   font-size: 20px;
   font-weight: 600;
-  color: #333;
+  color: var(--text-primary);
   margin: 0;
 }
 
@@ -151,6 +215,108 @@ ion-content {
   font-size: 20px;
 }
 
+/* ===== TAMBAHAN STYLES UNTUK ACTION BUTTONS CONTAINER ===== */
+.action-buttons-container {
+  position: absolute;
+  right: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Theme toggle button styling */
+.theme-toggle-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--button-bg);
+  border: 1px solid var(--button-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.theme-toggle-button:hover {
+  background: var(--button-hover);
+  transform: scale(1.05);
+}
+
+.theme-toggle-button ion-icon {
+  color: var(--text-primary);
+  font-size: 20px;
+}
+
+/* Update search button dengan variables */
+.search-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--button-bg);
+  border: 1px solid var(--button-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.search-button:hover {
+  background: var(--button-hover);
+  transform: scale(1.05);
+}
+
+.search-button ion-icon {
+  color: var(--text-primary);
+  font-size: 20px;
+}
+
+/* ===== UPDATE SEARCH MODAL UNTUK DARK MODE ===== */
+.search-modal {
+  background: var(--modal-bg);
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  max-height: 50vh;
+  margin: 0;
+  box-shadow: 0 8px 32px var(--glass-shadow);
+  animation: slideDown 0.3s ease-out;
+  border-radius: 0 0 24px 24px;
+}
+
+.search-modal-title {
+  font-size: 20px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.search-modal-input {
+  width: 100%;
+  padding: 16px 20px;
+  border: 2px solid var(--input-border);
+  border-radius: 12px;
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+  background: var(--input-bg);
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.search-modal-input:focus {
+  border-color: #667eea;
+  background: var(--input-focus-bg);
+  box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
 /* ===== SEARCH MODAL STYLES ===== */
 /* Modal overlay */
 .search-modal-overlay {
@@ -185,6 +351,7 @@ ion-content {
     opacity: 0;
     transform: translateY(-100%);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -287,13 +454,13 @@ ion-content {
 .search-modal-text h3 {
   font-size: 24px;
   font-weight: 700;
-  color: #ffffff;
+  color: var(--text-primary);
   margin: 0 0 8px 0;
 }
 
 .search-modal-text p {
   font-size: 16px;
-  color: #ffffff;
+  color: var(--text-primary);
   margin: 0;
   line-height: 1.5;
 }
@@ -303,27 +470,77 @@ ion-content {
   .toolbar-content {
     padding: 0 12px;
   }
-  
+
   .app-title {
     font-size: 18px;
   }
-  
+
   .app-logo {
     width: 28px;
     height: 28px;
     font-size: 14px;
   }
-  
+
   .search-button-container {
     right: 12px;
   }
-  
+
   .search-button {
     width: 36px;
     height: 36px;
   }
-  
+
   .search-button ion-icon {
     font-size: 18px;
+  }
+
+  .action-buttons-container {
+    right: 12px;
+    gap: 6px;
+  }
+
+  .theme-toggle-button,
+  .search-button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .theme-toggle-button ion-icon,
+  .search-button ion-icon {
+    font-size: 18px;
+  }
+}
+
+/* ===== RESPONSIVE DESIGN UNTUK TABLET ===== */
+@media (max-width: 480px) {
+  .toolbar-content {
+    padding: 0 8px;
+  }
+  
+  .app-title {
+    font-size: 16px;
+  }
+  
+  .app-logo {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+  }
+  
+  .action-buttons-container {
+    right: 8px;
+    gap: 8px;
+  }
+  
+  /* Mobile kecil - tombol sangat compact */
+  .theme-toggle-button,
+  .search-button {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .theme-toggle-button ion-icon,
+  .search-button ion-icon {
+    font-size: 14px;
   }
 }

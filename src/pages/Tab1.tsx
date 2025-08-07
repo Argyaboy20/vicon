@@ -370,7 +370,11 @@ const Tab1: React.FC = () => {
         <div className="toolbar-content">
           {/* Logo and Title Container */}
           <div className="logo-title-container">
-            <div className="app-logo">VC</div>
+            <img 
+              src="/logo1.png" 
+              alt="VideoConvert Logo" 
+              className="app-logo-image"
+            />
             <h1 className="app-title">VideoConvert</h1>
           </div>
 

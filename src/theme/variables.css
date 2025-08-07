@@ -2,7 +2,7 @@
   /* Light mode colors */
   --bg-primary: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   --bg-secondary: rgba(255, 255, 255, 0.1);
-  --text-primary: #333;
+  --text-primary: #000000;
   --text-secondary: #666;
   --text-white: #ffffff;
   --glass-bg: rgba(255, 255, 255, 0.1);
@@ -156,21 +156,21 @@ ion-content {
 .logo-title-container {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 5px;
 }
 
 /* App logo styling */
-.app-logo {
-  width: 32px;
-  height: 32px;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+.app-logo-image {
+  width: 36px;
+  height: 36px;
   border-radius: 8px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  font-weight: bold;
-  font-size: 16px;
+  object-fit: contain; /* Menjaga proporsi gambar */
+  object-position: center;
+}
+
+.app-logo-image:hover {
+  transform: scale(1.05);
+  transition: transform 0.2s ease;
 }
 
 /* App title styling */
@@ -475,10 +475,13 @@ ion-content {
     font-size: 18px;
   }
 
-  .app-logo {
+  .app-logo-image {
     width: 28px;
     height: 28px;
-    font-size: 14px;
+  }
+
+  .search-modal-text {
+    margin-top: 40px; /* Tambah space dari 24px ke 40px */
   }
 
   .search-button-container {
@@ -521,10 +524,13 @@ ion-content {
     font-size: 16px;
   }
   
-  .app-logo {
+  .app-logo-image {
     width: 24px;
     height: 24px;
-    font-size: 12px;
+  }
+
+  .search-modal-text {
+    margin-top: 80px; /* Lebih banyak space untuk mobile kecil */
   }
   
   .action-buttons-container {

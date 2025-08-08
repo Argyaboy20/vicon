@@ -272,15 +272,28 @@
 .feature-card {
   text-align: center;
   padding: 24px 20px;
-  background: white;
+  background: var(--feature-card-bg);
   border-radius: 16px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  /* Light mode - no border */
+  border: 1px solid transparent;
+}
+
+/* Dark mode - add white border */
+.dark-mode .feature-card {
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4);
 }
 
 .feature-card:hover {
   transform: translateY(-5px);
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.dark-mode .feature-card:hover {
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.6);
+  border-color: rgba(255, 255, 255, 0.3);
 }
 
 .feature-icon {
@@ -293,26 +306,39 @@
   border-radius: 12px;
   background: #f0f4ff;
   border: 2px solid #e8edff;
+  transition: all 0.3s ease;
+}
+
+.dark-mode .feature-icon {
+  background: rgba(102, 126, 234, 0.1);
+  border-color: rgba(102, 126, 234, 0.3);
 }
 
 .feature-icon svg {
   width: 32px;
   height: 32px;
   color: #667eea;
+  transition: color 0.3s ease;
+}
+
+.dark-mode .feature-icon svg {
+  color: #8fa7ff;
 }
 
 .feature-title {
   font-size: 18px;
   font-weight: 600;
-  color: #333;
+  color: var(--text-primary);
   margin-bottom: 12px;
+  transition: color 0.3s ease;
 }
 
 .feature-description {
   font-size: 14px;
-  color: #666;
+  color: var(--text-secondary);
   line-height: 1.6;
   text-align: justify;
+  transition: color 0.3s ease;
 }
 
 /* ===== ENHANCED STYLES FOR VIDEO CONVERTER ===== */

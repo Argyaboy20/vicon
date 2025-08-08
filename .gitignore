@@ -4,10 +4,6 @@
 /node_modules
 /.pnp
 .pnp.js
-/public
-/index.html
-/package-lock.json
-/package.json
 .vscode
 /setupTests.ts
 /App.test.tsx

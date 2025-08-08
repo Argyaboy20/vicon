@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "npx ionic build",
+    "build": "vite build",
     "start": "ionic serve",
     "preview": "vite preview",
     "test.e2e": "cypress run",

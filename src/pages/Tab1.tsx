@@ -5,9 +5,10 @@ import {
   IonPage,
   IonTitle,
   IonToolbar,
-  IonIcon
+  IonIcon,
+  IonMenu
 } from '@ionic/react';
-import { searchOutline, moonOutline, sunnyOutline } from 'ionicons/icons';
+import { searchOutline, moonOutline, sunnyOutline, menuOutline, imageOutline, documentOutline, closeOutline } from 'ionicons/icons';
 import './Tab1.css';
 import '../theme/variables.css';
 
@@ -42,6 +43,13 @@ const Tab1: React.FC = () => {
   const [isConverting, setIsConverting] = useState<boolean>(false);
   const [conversionResult, setConversionResult] = useState<ConversionResult | null>(null);
   const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
+  const navigateToImageConverter = () => {
+    window.location.href = '/imageconverter';
+  };
+
+  const navigateToFileConverter = () => {
+    window.location.href = '/fileconverter';
+  };
 
   /* ===== CONSTANTS ===== */
   const resolutionOptions = ['480p', '720p', '1080p', '1440p'];
@@ -368,11 +376,46 @@ const Tab1: React.FC = () => {
     <IonHeader>
       <IonToolbar>
         <div className="toolbar-content">
+          {/* Desktop Navigation Buttons (Hidden on mobile) */}
+          <div className="nav-buttons-container">
+            <button
+              className="nav-button"
+              onClick={navigateToImageConverter}
+              aria-label="Go to Image Converter"
+              title="Image Converter"
+            >
+              Image
+            </button>
+            <button
+              className="nav-button"
+              onClick={navigateToFileConverter}
+              aria-label="Go to File Converter"
+              title="File Converter"
+            >
+              File
+            </button>
+          </div>
+
+          {/* Mobile Menu Button (Hidden on desktop) */}
+          <div className="menu-button-container">
+            <button
+              className="mobile-menu-button"
+              onClick={() => {
+                const menu = document.querySelector('ion-menu') as any;
+                if (menu) menu.open();
+              }}
+              aria-label="Open navigation menu"
+              title="Navigation menu"
+            >
+              <IonIcon icon={menuOutline} />
+            </button>
+          </div>
+
           {/* Logo and Title Container */}
           <div className="logo-title-container">
-            <img 
-              src="/logo1.png" 
-              alt="VideoConvert Logo" 
+            <img
+              src="/logo1.png"
+              alt="VideoConvert Logo"
               className="app-logo-image"
             />
             <h1 className="app-title">VideoConvert</h1>
@@ -403,6 +446,156 @@ const Tab1: React.FC = () => {
         </div>
       </IonToolbar>
     </IonHeader>
+  );
+
+  const renderSearchModal = () => (
+    showSearchModal && (
+      <div className="search-modal-overlay" onClick={toggleSearchModal}>
+        <div className="search-modal" onClick={(e) => e.stopPropagation()}>
+          <div className="search-modal-content">
+            <div className="search-modal-header">
+              <h3 className="search-modal-title">Want to search our conversion tools?</h3>
+              <button
+                className="search-modal-close"
+                onClick={toggleSearchModal}
+              >
+                ×
+              </button>
+            </div>
+
+            <form onSubmit={handleSearchSubmit}>
+              <input
+                type="text"
+                className="search-modal-input"
+                placeholder="Search for tools..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                autoFocus
+              />
+            </form>
+
+            {/* Center Icon Container */}
+            <div className="search-modal-icon-container">
+              <div className="search-modal-icon">
+                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M3 7V17C3 18.1046 3.89543 19 5 19H9L7 17H5V7H19V10H21V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7Z" fill="currentColor" />
+                  <path d="M14 12.5L16.5 15L21 10.5L19.5 9L16.5 12L15 10.5L14 12.5Z" fill="currentColor" />
+                  <path d="M9 12H15V14H9V12Z" fill="currentColor" />
+                  <path d="M9 8H15V10H9V8Z" fill="currentColor" />
+                </svg>
+              </div>
+            </div>
+
+            {/* Bottom Text */}
+            <div className="search-modal-text">
+              <h3>Explore 1,000+ file conversion tools.</h3>
+              <p>Start searching by entering the file type you want to convert. Example: JPG to PNG.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    )
+  );
+
+  {/* Ion Menu di Mobile */ }
+  const renderMobileMenu = () => (
+    <IonMenu contentId="main-content" side="start" className="mobile-nav-menu">
+      <div className="mobile-nav-header">
+        <h2 className="mobile-nav-title">Menu Convert</h2>
+      </div>
+      <IonContent>
+          <a
+            href="#"
+            className="mobile-nav-item"
+            onClick={(e) => {
+              e.preventDefault();
+              navigateToImageConverter();
+              // Close menu after navigation
+              const menu = document.querySelector('ion-menu') as any;
+              if (menu) menu.close();
+            }}
+          >
+            <IonIcon icon={imageOutline} />
+            <span>Image Converter</span>
+          </a>
+          <a
+            href="#"
+            className="mobile-nav-item"
+            onClick={(e) => {
+              e.preventDefault();
+              navigateToFileConverter();
+              // Close menu after navigation
+              const menu = document.querySelector('ion-menu') as any;
+              if (menu) menu.close();
+            }}
+          >
+            <IonIcon icon={documentOutline} />
+            <span>File Converter</span>
+          </a>
+      </IonContent>
+    </IonMenu>
+  );
+
+  /* Rest of the render methods remain the same... */
+  const renderFeatures = () => (
+    <div className="features-section">
+      <div className="features-grid">
+        {/* Convert Any File Feature */}
+        <div className="feature-card">
+          <div className="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.89 22 5.99 22H18C19.1 22 20 21.1 20 20V8L14 2Z" stroke="currentColor" strokeWidth="2" fill="none" />
+              <path d="M14 2V8H20" stroke="currentColor" strokeWidth="2" fill="none" />
+              <path d="M16 13H8" stroke="currentColor" strokeWidth="2" />
+              <path d="M16 17H8" stroke="currentColor" strokeWidth="2" />
+              <path d="M10 9H8" stroke="currentColor" strokeWidth="2" />
+            </svg>
+          </div>
+          <h3 className="feature-title">Convert Any Link Video</h3>
+          <p className="feature-description">
+            FreeConvert supports any type of link videos.
+            You can convert videos from YouTube, Instagram, TikTok, and more.
+            There are tons of Advanced Options to fine-tune your conversions.
+          </p>
+        </div>
+
+        {/* Works Anywhere Feature */}
+        <div className="feature-card">
+          <div className="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M20 16V7C20 5.9 19.1 5 18 5H6C4.9 5 4 5.9 4 7V16C4 17.1 4.9 18 6 18H18C19.1 18 20 17.1 20 16Z" stroke="currentColor" strokeWidth="2" fill="none" />
+              <path d="M12 2V5" stroke="currentColor" strokeWidth="2" />
+              <path d="M12 18V22" stroke="currentColor" strokeWidth="2" />
+              <path d="M8 22H16" stroke="currentColor" strokeWidth="2" />
+            </svg>
+          </div>
+          <h3 className="feature-title">Works Anywhere</h3>
+          <p className="feature-description">
+            FreeConvert is an online file converter. So it works on
+            Windows, Mac, Linux, or any mobile device. All major
+            browsers are supported. Simply upload a link and
+            select a target resolution.
+          </p>
+        </div>
+
+        {/* Privacy Guaranteed Feature */}
+        <div className="feature-card">
+          <div className="feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M12 22S8 18 8 13V7L12 5L16 7V13C16 18 12 22 12 22Z" stroke="currentColor" strokeWidth="2" fill="none" />
+              <path d="M9 12L11 14L15 10" stroke="currentColor" strokeWidth="2" />
+            </svg>
+          </div>
+          <h3 className="feature-title">Privacy Guaranteed</h3>
+          <p className="feature-description">
+            We know that file security and privacy are important
+            to you. That is why we use 256-bit SSL encryption
+            when transferring files and automatically delete them
+            after a few hours.
+          </p>
+        </div>
+      </div>
+    </div>
   );
 
   const renderVideoInput = () => (
@@ -500,153 +693,47 @@ const Tab1: React.FC = () => {
     )
   );
 
-  /* Rest of the render methods remain the same... */
-  const renderFeatures = () => (
-    <div className="features-section">
-      <div className="features-grid">
-        {/* Convert Any File Feature */}
-        <div className="feature-card">
-          <div className="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M14 2H6C4.9 2 4 2.9 4 4V20C4 21.1 4.89 22 5.99 22H18C19.1 22 20 21.1 20 20V8L14 2Z" stroke="currentColor" strokeWidth="2" fill="none" />
-              <path d="M14 2V8H20" stroke="currentColor" strokeWidth="2" fill="none" />
-              <path d="M16 13H8" stroke="currentColor" strokeWidth="2" />
-              <path d="M16 17H8" stroke="currentColor" strokeWidth="2" />
-              <path d="M10 9H8" stroke="currentColor" strokeWidth="2" />
-            </svg>
-          </div>
-          <h3 className="feature-title">Convert Any Link Video</h3>
-          <p className="feature-description">
-            FreeConvert supports any type of link videos.
-            You can convert videos from YouTube, Instagram, TikTok, and more.
-            There are tons of Advanced Options to fine-tune your conversions.
-          </p>
-        </div>
-
-        {/* Works Anywhere Feature */}
-        <div className="feature-card">
-          <div className="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M20 16V7C20 5.9 19.1 5 18 5H6C4.9 5 4 5.9 4 7V16C4 17.1 4.9 18 6 18H18C19.1 18 20 17.1 20 16Z" stroke="currentColor" strokeWidth="2" fill="none" />
-              <path d="M12 2V5" stroke="currentColor" strokeWidth="2" />
-              <path d="M12 18V22" stroke="currentColor" strokeWidth="2" />
-              <path d="M8 22H16" stroke="currentColor" strokeWidth="2" />
-            </svg>
-          </div>
-          <h3 className="feature-title">Works Anywhere</h3>
-          <p className="feature-description">
-            FreeConvert is an online file converter. So it works on
-            Windows, Mac, Linux, or any mobile device. All major
-            browsers are supported. Simply upload a link and
-            select a target resolution.
-          </p>
-        </div>
-
-        {/* Privacy Guaranteed Feature */}
-        <div className="feature-card">
-          <div className="feature-icon">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 22S8 18 8 13V7L12 5L16 7V13C16 18 12 22 12 22Z" stroke="currentColor" strokeWidth="2" fill="none" />
-              <path d="M9 12L11 14L15 10" stroke="currentColor" strokeWidth="2" />
-            </svg>
-          </div>
-          <h3 className="feature-title">Privacy Guaranteed</h3>
-          <p className="feature-description">
-            We know that file security and privacy are important
-            to you. That is why we use 256-bit SSL encryption
-            when transferring files and automatically delete them
-            after a few hours.
-          </p>
-        </div>
-      </div>
-    </div>
-  );
-
-  const renderSearchModal = () => (
-    showSearchModal && (
-      <div className="search-modal-overlay" onClick={toggleSearchModal}>
-        <div className="search-modal" onClick={(e) => e.stopPropagation()}>
-          <div className="search-modal-content">
-            <div className="search-modal-header">
-              <h3 className="search-modal-title">Want to search our conversion tools?</h3>
-              <button
-                className="search-modal-close"
-                onClick={toggleSearchModal}
-              >
-                ×
-              </button>
-            </div>
-
-            <form onSubmit={handleSearchSubmit}>
-              <input
-                type="text"
-                className="search-modal-input"
-                placeholder="Search for tools..."
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-                autoFocus
-              />
-            </form>
-
-            {/* Center Icon Container */}
-            <div className="search-modal-icon-container">
-              <div className="search-modal-icon">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <path d="M3 7V17C3 18.1046 3.89543 19 5 19H9L7 17H5V7H19V10H21V7C21 5.89543 20.1046 5 19 5H5C3.89543 5 3 5.89543 3 7Z" fill="currentColor" />
-                  <path d="M14 12.5L16.5 15L21 10.5L19.5 9L16.5 12L15 10.5L14 12.5Z" fill="currentColor" />
-                  <path d="M9 12H15V14H9V12Z" fill="currentColor" />
-                  <path d="M9 8H15V10H9V8Z" fill="currentColor" />
-                </svg>
-              </div>
-            </div>
-
-            {/* Bottom Text */}
-            <div className="search-modal-text">
-              <h3>Explore 1,000+ file conversion tools.</h3>
-              <p>Start searching by entering the file type you want to convert. Example: JPG to PNG.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
-  );
-
   /* ===== MAIN RENDER ===== */
   return (
-    <IonPage>
-      {renderHeader()}
+    <>
+      {/* Mobile Menu - Tambahkan ini SEBELUM IonPage */}
+      {renderMobileMenu()}
 
-      <IonContent fullscreen>
-        <div className="video-converter-container">
-          {/* Page Title */}
-          <h2 className="page-title">Video Converter</h2>
+      <IonPage id="main-content">
+        {renderHeader()}
 
-          {/* Page Subtitle */}
-          <p className="page-subtitle">Easily convert any type of links video, online.</p>
+        <IonContent fullscreen>
+          <div className="video-converter-container">
+            {/* Page Title */}
+            <h2 className="page-title">Video Converter</h2>
 
-          {/* Video Input Section */}
-          {renderVideoInput()}
+            {/* Page Subtitle */}
+            <p className="page-subtitle">Easily convert any type of links video, online.</p>
 
-          {/* Resolution Options */}
-          {renderResolutionOptions()}
+            {/* Video Input Section */}
+            {renderVideoInput()}
 
-          {/* Terms of Use Text */}
-          <div className="terms-text">
-            By proceeding, you agree to our{' '}
-            <span className="terms-link" onClick={handleTermsClick}>
-              Terms of Use
-            </span>
-            .
+            {/* Resolution Options */}
+            {renderResolutionOptions()}
+
+            {/* Terms of Use Text */}
+            <div className="terms-text">
+              By proceeding, you agree to our{' '}
+              <span className="terms-link" onClick={handleTermsClick}>
+                Terms of Use
+              </span>
+              .
+            </div>
+
+            {/* Features Section */}
+            {renderFeatures()}
           </div>
+        </IonContent>
 
-          {/* Features Section */}
-          {renderFeatures()}
-        </div>
-      </IonContent>
-
-      {/* Search Modal */}
-      {renderSearchModal()}
-    </IonPage>
+        {/* Search Modal */}
+        {renderSearchModal()}
+      </IonPage>
+    </>
   );
 };
 

@@ -66,6 +66,161 @@
   --resolution-selected-text: white;
 }
 
+/* ===== NAVIGATION BUTTONS STYLES ===== */
+.nav-buttons-container {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-button {
+  padding: 8px 16px;
+  border-radius: 20px;
+  background: var(--button-bg);
+  border: 1px solid var(--button-border);
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 60px;
+}
+
+.nav-button:hover {
+  background: var(--button-hover);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px var(--glass-shadow);
+  color: var(--text-primary);
+}
+
+.nav-button:active {
+  transform: translateY(0);
+}
+
+/* ===== MENU BUTTON FOR MOBILE ===== */
+.menu-button-container {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  display: none;
+  /* Hidden by default, shown on mobile */
+}
+
+.mobile-menu-button {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--button-bg);
+  border: 1px solid var(--button-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.mobile-menu-button:hover {
+  background: var(--button-hover);
+  transform: scale(1.05);
+}
+
+.mobile-menu-button ion-icon {
+  color: var(--text-white);
+  font-size: 20px;
+}
+
+/* ===== MOBILE MENU STYLES ===== */
+.mobile-nav-menu {
+  --background: #667eea !important;
+  border-radius: 0 20px 20px 0;
+  box-shadow: 4px 0 20px rgba(0, 0, 0, 0.3);
+}
+
+.mobile-nav-menu ion-content {
+  --background: transparent !important;
+  --padding-start: 0 !important;
+  --padding-end: 0 !important;
+  --padding-top: 0 !important;
+  --padding-bottom: 0 !important;
+}
+
+.mobile-nav-header {
+  padding: 16px 20px 12px 20px; /* Kurangi bottom padding */
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  margin-bottom: 0; /* Pastikan no margin */
+}
+
+/* HILANGKAN PADDING/MARGIN */
+.mobile-nav-menu .nav-items-container {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+
+.mobile-nav-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff; /* UBAH: selalu putih karena background #667eea */
+  margin: 0;
+}
+
+.mobile-nav-item {
+  padding: 16px 20px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: #ffffff;
+  text-decoration: none;
+  transition: background 0.2s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 0; /* Hilangkan margin */
+}
+
+.mobile-nav-item:first-child {
+  margin-top: 0 !important; /* Pastikan item pertama no margin */
+  padding-top: 16px !important;
+}
+
+/* BACKDROP BLUR UNTUK AREA DI LUAR MENU */
+ion-menu-controller {
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+/* VERLAY BLUR CUSTOM */
+.menu-backdrop-blur {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.2);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 999;
+  pointer-events: none;
+}
+
+/* ION-MENU BACKDROP OVERRIDE */
+ion-backdrop {
+  background: rgba(0, 0, 0, 0.2) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+}
+
 /* ===== GLOBAL PAGE BACKGROUND ===== */
 ion-content {
   --background: transparent;
@@ -142,9 +297,15 @@ ion-content {
 }
 
 .logo-title-container {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
   display: flex;
   align-items: center;
   gap: 8px;
+  margin: 0 !important;
+  /* Override semua margin */
 }
 
 .app-logo-image {
@@ -227,7 +388,8 @@ ion-content {
   width: 100%;
   max-width: 100%;
   min-height: auto;
-  max-height: 80vh; /* Increased from 50vh to 80vh */
+  max-height: 80vh;
+  /* Increased from 50vh to 80vh */
   margin: 0;
   box-shadow: 0 8px 32px var(--glass-shadow);
   animation: slideDown 0.3s ease-out;
@@ -241,6 +403,7 @@ ion-content {
     opacity: 0;
     transform: translateY(-100%);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -249,7 +412,8 @@ ion-content {
 
 /* FIXED: Modal content dengan padding yang konsisten */
 .search-modal-content {
-  padding: 32px 20px 40px 20px; /* Reduced top padding and increased bottom */
+  padding: 32px 20px 40px 20px;
+  /* Reduced top padding and increased bottom */
   min-height: 100%;
   display: flex;
   flex-direction: column;
@@ -317,7 +481,8 @@ ion-content {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0 30px 0; /* Reduced margins */
+  margin: 20px 0 30px 0;
+  /* Reduced margins */
   flex-shrink: 0;
 }
 
@@ -346,7 +511,8 @@ ion-content {
 /* FIXED: Bottom text dengan margin yang lebih kecil */
 .search-modal-text {
   text-align: center;
-  margin-top: 16px; /* Significantly reduced from 24px-40px */
+  margin-top: 16px;
+  /* Significantly reduced from 24px-40px */
   margin-bottom: 0;
   flex-shrink: 0;
 }
@@ -367,52 +533,67 @@ ion-content {
 }
 
 /* ===== COMPREHENSIVE RESPONSIVE DESIGN ===== */
-
 /* Extra Large Desktop: 1920px+ */
 @media (min-width: 1920px) {
   .toolbar-content {
     padding: 0 32px;
   }
-  
+
   .app-title {
     font-size: 22px;
   }
-  
+
   .app-logo-image {
     width: 40px;
     height: 40px;
   }
-  
+
   .action-buttons-container {
     right: 32px;
   }
-  
+
   .search-modal {
     max-width: 600px;
     border-radius: 24px;
     margin: 80px auto 0;
   }
-  
+
   .search-modal-content {
     padding: 48px 40px 48px 40px;
   }
-  
+
   .search-modal-icon {
     width: 120px;
     height: 120px;
   }
-  
+
   .search-modal-icon svg {
     width: 60px;
     height: 60px;
   }
-  
+
   .search-modal-text h3 {
     font-size: 24px;
   }
-  
+
   .search-modal-text p {
     font-size: 16px;
+  }
+
+  .nav-buttons-container {
+    left: 32px;
+    gap: 12px;
+    display: flex;
+  }
+
+  .nav-button {
+    padding: 10px 20px;
+    font-size: 15px;
+    min-width: 70px;
+  }
+
+  .menu-button-container {
+    display: none;
   }
 }
 
@@ -423,19 +604,36 @@ ion-content {
     border-radius: 20px;
     margin: 60px auto 0;
   }
-  
+
   .search-modal-content {
     padding: 40px 32px 40px 32px;
   }
-  
+
   .search-modal-icon {
     width: 100px;
     height: 100px;
   }
-  
+
   .search-modal-icon svg {
     width: 50px;
     height: 50px;
+  }
+
+  /* TAMBAH INI: */
+  .nav-buttons-container {
+    left: 32px;
+    gap: 12px;
+    display: flex;
+  }
+
+  .nav-button {
+    padding: 10px 20px;
+    font-size: 15px;
+    min-width: 70px;
+  }
+
+  .menu-button-container {
+    display: none;
   }
 }
 
@@ -444,19 +642,27 @@ ion-content {
   .toolbar-content {
     padding: 0 24px;
   }
-  
+
   .action-buttons-container {
     right: 24px;
   }
-  
+
   .search-modal {
     max-width: 480px;
     border-radius: 16px;
     margin: 40px auto 0;
   }
-  
+
   .search-modal-content {
     padding: 36px 28px 36px 28px;
+  }
+
+  .nav-buttons-container {
+    display: flex;
+  }
+
+  .menu-button-container {
+    display: none;
   }
 }
 
@@ -465,62 +671,88 @@ ion-content {
   .toolbar-content {
     padding: 0 20px;
   }
-  
+
   .app-title {
     font-size: 18px;
   }
-  
+
   .app-logo-image {
     width: 32px;
     height: 32px;
   }
-  
+
   .action-buttons-container {
     right: 20px;
     gap: 6px;
   }
-  
+
   .theme-toggle-button,
   .search-button {
     width: 36px;
     height: 36px;
   }
-  
+
   .theme-toggle-button ion-icon,
   .search-button ion-icon {
     font-size: 18px;
   }
-  
+
   .search-modal {
     max-width: 90%;
     margin: 20px auto 0;
     max-height: 70vh;
   }
-  
+
   .search-modal-content {
     padding: 32px 24px 32px 24px;
   }
-  
+
   .search-modal-icon {
     width: 70px;
     height: 70px;
   }
-  
+
   .search-modal-icon svg {
     width: 35px;
     height: 35px;
   }
-  
+
   .search-modal-text {
     margin-top: 12px;
   }
-  
+
   .search-modal-text h3 {
     font-size: 18px;
   }
-  
+
   .search-modal-text p {
     font-size: 13px;
+  }
+
+  .nav-buttons-container {
+    display: flex;
+  }
+
+  .nav-button {
+    padding: 7px 14px;
+    font-size: 13px;
+    min-width: 55px;
+  }
+
+  .logo-title-container {
+    margin-left: 140px !important;
+  }
+
+  .menu-button-container {
+    display: none;
+  }
+
+  .logo-title-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0 !important;
   }
 }
 
@@ -529,30 +761,46 @@ ion-content {
   .toolbar-content {
     padding: 0 16px;
   }
-  
+
   .logo-title-container {
     gap: 6px;
   }
-  
+
   .action-buttons-container {
     right: 16px;
   }
-  
+
   .search-modal {
     max-width: 95%;
     max-height: 65vh;
   }
-  
+
   .search-modal-content {
     padding: 28px 20px 28px 20px;
   }
-  
+
   .search-modal-icon-container {
     margin: 16px 0 24px 0;
   }
-  
+
   .search-modal-text {
     margin-top: 10px;
+  }
+
+  .nav-buttons-container {
+    display: none;
+  }
+
+  .menu-button-container {
+    display: block;
+  }
+
+  .logo-title-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0 !important;
   }
 }
 
@@ -561,81 +809,97 @@ ion-content {
   .toolbar-content {
     padding: 0 14px;
   }
-  
+
   .app-title {
     font-size: 17px;
   }
-  
+
   .app-logo-image {
     width: 30px;
     height: 30px;
   }
-  
+
   .action-buttons-container {
     right: 14px;
     gap: 4px;
   }
-  
+
   .theme-toggle-button,
   .search-button {
     width: 34px;
     height: 34px;
   }
-  
+
   .theme-toggle-button ion-icon,
   .search-button ion-icon {
     font-size: 16px;
   }
-  
+
   .search-modal {
     max-width: 100%;
     margin: 0;
     max-height: 75vh;
     border-radius: 0 0 20px 20px;
   }
-  
+
   .search-modal-content {
     padding: 24px 16px 24px 16px;
   }
-  
+
   .search-modal-header {
     margin-bottom: 20px;
   }
-  
+
   .search-modal-title {
     font-size: 18px;
   }
-  
+
   .search-modal-input {
     margin-bottom: 20px;
     padding: 14px 16px;
   }
-  
+
   .search-modal-icon {
     width: 60px;
     height: 60px;
   }
-  
+
   .search-modal-icon svg {
     width: 30px;
     height: 30px;
   }
-  
+
   .search-modal-icon-container {
     margin: 14px 0 20px 0;
   }
-  
+
   .search-modal-text {
     margin-top: 8px;
   }
-  
+
   .search-modal-text h3 {
     font-size: 17px;
     margin-bottom: 6px;
   }
-  
+
   .search-modal-text p {
     font-size: 13px;
+  }
+
+  .nav-buttons-container {
+    display: none;
+  }
+
+  .menu-button-container {
+    display: block;
+  }
+
+  .logo-title-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0 !important;
   }
 }
 
@@ -644,50 +908,75 @@ ion-content {
   .toolbar-content {
     padding: 0 12px;
   }
-  
+
   .app-title {
     font-size: 16px;
   }
-  
+
   .app-logo-image {
     width: 28px;
     height: 28px;
   }
-  
+
   .action-buttons-container {
     right: 12px;
   }
-  
+
   .theme-toggle-button,
   .search-button {
     width: 32px;
     height: 32px;
   }
-  
+
   .theme-toggle-button ion-icon,
   .search-button ion-icon {
     font-size: 15px;
   }
-  
+
   .search-modal-content {
     padding: 20px 14px 20px 14px;
   }
-  
+
   .search-modal-title {
     font-size: 17px;
   }
-  
+
   .search-modal-input {
     padding: 12px 14px;
     font-size: 15px;
   }
-  
+
   .search-modal-text h3 {
     font-size: 16px;
   }
-  
+
   .search-modal-text p {
     font-size: 12px;
+  }
+
+  .nav-buttons-container {
+    display: none;
+  }
+
+  .menu-button-container {
+    display: block;
+  }
+
+  .mobile-menu-button {
+    width: 36px;
+    height: 36px;
+  }
+
+  .mobile-menu-button ion-icon {
+    font-size: 18px;
+  }
+
+  .logo-title-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0 !important;
   }
 }
 
@@ -696,86 +985,111 @@ ion-content {
   .toolbar-content {
     padding: 0 10px;
   }
-  
+
   .app-title {
     font-size: 15px;
   }
-  
+
   .app-logo-image {
     width: 26px;
     height: 26px;
   }
-  
+
   .logo-title-container {
     gap: 4px;
   }
-  
+
   .action-buttons-container {
     right: 10px;
     gap: 2px;
   }
-  
+
   .theme-toggle-button,
   .search-button {
     width: 30px;
     height: 30px;
   }
-  
+
   .theme-toggle-button ion-icon,
   .search-button ion-icon {
     font-size: 14px;
   }
-  
+
   .search-modal-content {
     padding: 18px 12px 18px 12px;
   }
-  
+
   .search-modal-header {
     margin-bottom: 16px;
   }
-  
+
   .search-modal-title {
     font-size: 16px;
   }
-  
+
   .search-modal-close {
     width: 36px;
     height: 36px;
     font-size: 24px;
   }
-  
+
   .search-modal-input {
     padding: 12px;
     font-size: 14px;
     margin-bottom: 16px;
   }
-  
+
   .search-modal-icon {
     width: 50px;
     height: 50px;
   }
-  
+
   .search-modal-icon svg {
     width: 25px;
     height: 25px;
   }
-  
+
   .search-modal-icon-container {
     margin: 12px 0 16px 0;
   }
-  
+
   .search-modal-text {
     margin-top: 6px;
   }
-  
+
   .search-modal-text h3 {
     font-size: 15px;
     margin-bottom: 4px;
   }
-  
+
   .search-modal-text p {
     font-size: 11px;
     line-height: 1.4;
+  }
+
+  .nav-buttons-container {
+    display: none;
+  }
+
+  .menu-button-container {
+    display: block;
+  }
+
+  .mobile-menu-button {
+    width: 32px;
+    height: 32px;
+  }
+
+  .mobile-menu-button ion-icon {
+    font-size: 16px;
+  }
+
+   .logo-title-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0 !important;
   }
 }
 
@@ -784,45 +1098,70 @@ ion-content {
   .toolbar-content {
     padding: 0 8px;
   }
-  
+
   .app-title {
     font-size: 14px;
   }
-  
+
   .app-logo-image {
     width: 24px;
     height: 24px;
   }
-  
+
   .action-buttons-container {
     right: 8px;
     gap: 1px;
   }
-  
+
   .theme-toggle-button,
   .search-button {
     width: 28px;
     height: 28px;
   }
-  
+
   .theme-toggle-button ion-icon,
   .search-button ion-icon {
     font-size: 12px;
   }
-  
+
   .search-modal-content {
     padding: 16px 10px 16px 10px;
   }
-  
+
   .search-modal-title {
     font-size: 15px;
   }
-  
+
   .search-modal-text h3 {
     font-size: 14px;
   }
-  
+
   .search-modal-text p {
     font-size: 10px;
+  }
+
+  .nav-buttons-container {
+    display: none;
+  }
+
+  .menu-button-container {
+    display: block;
+  }
+
+  .mobile-menu-button {
+    width: 28px;
+    height: 28px;
+  }
+
+  .mobile-menu-button ion-icon {
+    font-size: 14px;
+  }
+
+   .logo-title-container {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    margin: 0 !important;
   }
 }

@@ -7,7 +7,7 @@ import {
   IonToolbar,
   IonIcon
 } from '@ionic/react';
-import { searchOutline } from 'ionicons/icons';
+import { searchOutline, moonOutline, sunnyOutline } from 'ionicons/icons';
 import ExploreContainer from '../components/ExploreContainer';
 import './Tab3.css';
 import '../theme/variables.css'; /* Import shared styling */
@@ -17,6 +17,7 @@ const Tab3: React.FC = () => {
   /* ===== STATE MANAGEMENT ===== */
   const [showSearchModal, setShowSearchModal] = useState<boolean>(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [isDarkMode, setIsDarkMode] = useState<boolean>(false);
 
   /* ===== EVENT HANDLERS ===== */
   const toggleSearchModal = () => {
@@ -31,6 +32,33 @@ const Tab3: React.FC = () => {
     setSearchQuery('');
   };
 
+  /* Toggle between dark mode and light mode */
+  const toggleDarkMode = (): void => {
+    const newDarkMode = !isDarkMode;
+    setIsDarkMode(newDarkMode);
+
+    // Apply dark mode class to document for global styling
+    if (newDarkMode) {
+      document.documentElement.classList.add('dark-mode');
+    } else {
+      document.documentElement.classList.remove('dark-mode');
+    }
+  };
+
+  /* Initialize dark mode based on system preference */
+  const initializeDarkMode = (): void => {
+    // Default to light mode (false)
+    setIsDarkMode(false);
+    // Ensure dark mode class is removed on init
+    document.documentElement.classList.remove('dark-mode');
+  };
+
+  /* ===== USE EFFECT UNTUK INISIALISASI DARK MODE ===== */
+  React.useEffect(() => {
+    // Initialize with light mode as default
+    initializeDarkMode();
+  }, []);
+
   /* ===== RENDER METHOD ===== */
   return (
     <IonPage>
@@ -40,18 +68,32 @@ const Tab3: React.FC = () => {
           <div className="toolbar-content">
             {/* Logo and Title Container */}
             <div className="logo-title-container">
-              <div className="app-logo">
-                VC
-              </div>
+              <img
+                src="/logo1.png"
+                alt="VideoConvert Logo"
+                className="app-logo-image"
+              />
               <h1 className="app-title">VideoConvert</h1>
             </div>
 
-            {/* Search Button */}
-            <div className="search-button-container">
+            {/* Action Buttons Container */}
+            <div className="action-buttons-container">
+              {/* Dark Mode Toggle Button */}
+              <button
+                className="theme-toggle-button"
+                onClick={toggleDarkMode}
+                aria-label={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+                title={isDarkMode ? "Switch to light mode" : "Switch to dark mode"}
+              >
+                <IonIcon icon={isDarkMode ? sunnyOutline : moonOutline} />
+              </button>
+
+              {/* Search Button */}
               <button
                 className="search-button"
                 onClick={toggleSearchModal}
                 aria-label="Search"
+                title="Search tools"
               >
                 <IonIcon icon={searchOutline} />
               </button>

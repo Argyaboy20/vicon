@@ -1,13 +1,5 @@
 import React, { useState } from 'react';
-import {
-  IonContent,
-  IonHeader,
-  IonPage,
-  IonTitle,
-  IonToolbar,
-  IonIcon,
-  IonMenu
-} from '@ionic/react';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar, IonIcon, IonMenu } from '@ionic/react';
 import { searchOutline, moonOutline, sunnyOutline, menuOutline, imageOutline, documentOutline, closeOutline } from 'ionicons/icons';
 import './Tab1.css';
 import '../theme/variables.css';
